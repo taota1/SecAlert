@@ -44,7 +44,12 @@ class VulAlert(object):
             if time_today == re_time[i]:
                 vlu_link = "https://help.aliyun.com/" + re_link[i]
                 url_list.append(vlu_link)
-
+        # 日志属性
+        if url_list != []:
+            print("【Log "+str(time_today)+"】 当日存在最新漏洞，请访问https://help.aliyun.com/noticelist/9213612.html查看")
+        else:
+            print("【Log "+str(time_today)+"】 当日无最新漏洞")
+            
         return url_list
 
     # 漏洞详情
@@ -63,12 +68,7 @@ class VulAlert(object):
             vlu_describe = res.find_all("div", id="se-knowledge")[0].p.get_text()
 
             vlu_list.append(vlu_name + "\n" + vlu_describe + "\n" + "漏洞详情：" + str(url) + "\n")
-        
-        if url_list != []:
-            print("【Log "+str(time_today)+"】 当日存在最新漏洞，请访问https://help.aliyun.com/noticelist/9213612.html查看")
-        else:
-            print("【Log "+str(time_today)+"】 当日无最新漏洞")
-            
+               
         return vlu_list
 
 
